@@ -5,11 +5,11 @@ Cvscan command line tool
 
 """
 
-import click
 import pprint
 
-from cvscan import Cvscan
-from cvscan import data_operations as do
+import click
+
+from cvscan import Cvscan, data_operations as do
 
 # Disable the warning that Click displays (as of Click version 5.0) when users
 # use unicode_literals in Python 2.
@@ -79,8 +79,8 @@ def add(org,skill,job,qual,extra):
       try:
         _job = _job.split(':')
         jobs[_job[0]] = _job[1]
-      except Exception:
-        print "Something wnet wrong: " + Exception
+      except Exception as e:
+        print("Something wnet wrong: " + str(e))
     do.add_jobs(jobs)
   if qual:
     do.add_qualifications(qual.split(','))

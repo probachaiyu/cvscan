@@ -4,15 +4,15 @@
 Utility functions that uses language processing to extract useful information
 
 """
-import pickle
 import logging
-import nltk
-import string
 import re
+import string
+
+import nltk
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
 
-import utilities
+import cvscan.utilities as utilities
 
 logging.basicConfig(level=logging.DEBUG)
 

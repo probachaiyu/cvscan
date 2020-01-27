@@ -4,10 +4,10 @@ Contains util functions for manipulating the data used by cvscan
 
 """
 
-import pickle
 import logging
+import pickle
 
-import dirpath
+import cvscan.dirpath as dirpath
 
 logging.basicConfig(level=logging.DEBUG)
 DATAPATH = dirpath.PKGPATH + '/data/'

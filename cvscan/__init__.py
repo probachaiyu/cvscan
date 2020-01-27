@@ -5,13 +5,15 @@ Main program
 
 """
 
-import converter
-import annotations_parser
-import details_parser as dp
-import language_parser as lp
 import json
-import dirpath
-import configurations
+
+import cvscan.annotations_parser
+import cvscan.configurations
+import cvscan.converter
+import cvscan.details_parser as dp
+import cvscan.dirpath
+import cvscan.language_parser as lp
+
 
 class Cvscan():
     def __init__(self, name, path = dirpath.RESUMEPATH):

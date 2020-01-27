@@ -43,6 +43,6 @@ def fetch_pdf_urls(file_name):
     file_pointer.close()
     return links
 
-  except Exception, exception_instance:
+  except Exception as exception_instance:
     logging.error('Error while fetching URLs : '+str(exception_instance))
     return ''

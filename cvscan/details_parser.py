@@ -4,13 +4,13 @@
 A utility to fetch details from the txt format of the resume
 
 """
-import re
-import pickle
 import logging
+import pickle
+import re
 from datetime import date
-import configurations as regex
 
-import dirpath
+import cvscan.configurations as regex
+import cvscan.dirpath as dirpath
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -31,7 +31,7 @@ def fetch_email(resume_text):
       resume_text = resume_text[result.end():]
       result = re.search(regular_expression, resume_text)
     return emails
-  except Exception, exception_instance:
+  except Exception as exception_instance:
     logging.error('Issue parsing email: ' + str(exception_instance))
     return []
 
@@ -66,7 +66,7 @@ def fetch_phone(resume_text):
           if phone is not '':
             return phone
     return phone
-  except Exception, exception_instance:
+  except Exception as exception_instance:
     logging.error('Issue parsing phone number: ' + resume_text +
       str(exception_instance))
     return None
@@ -204,7 +204,7 @@ def calculate_experience(resume_text):
       regex_result = re.search(regular_expression, resume_text)
 
     return end_year - start_year  # Use the obtained month attribute
-  except Exception, exception_instance:
+  except Exception as exception_instance:
     logging.error('Issue calculating experience: '+str(exception_instance))
     return None
 
