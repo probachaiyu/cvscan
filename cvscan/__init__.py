@@ -6,7 +6,7 @@ Main program
 """
 
 import json
-
+import textract
 import cvscan.annotations_parser
 import cvscan.configurations
 import cvscan.converter
@@ -17,8 +17,8 @@ import cvscan.language_parser as lp
 
 class Cvscan():
     def __init__(self, name, path = dirpath.RESUMEPATH):
-        self.path = path + '/' + name + '.pdf'
-        self.path = name + '.pdf'
+        self.path = path
+        self.path = name
 
         if self.exists():
             self.extract()
@@ -28,12 +28,26 @@ class Cvscan():
     def exists(self):
         return configurations.isfile(self.path)
 
+    def extract_text_from_doc(self, doc_path):
+        '''
+        Helper function to extract plain text from .doc or .docx files
+
+        :param doc_path: path to .doc or .docx file to be extracted
+        :return: string of extracted text
+        '''
+        temp = textract.process(doc_path)
+        text = [line.replace('\t', ' ') for line in temp.decode("utf-8").split('\n') if line]
+        return ' '.join(text)
+
     # Extracts raw text from resume
     # Currently only supports PDF
     def extract(self):
         # add functions to convert other formats to text
         if self.path.find(".pdf") != -1:
             self.raw_text = converter.pdf_to_txt(self.path)
+
+        if self.path.find(".doc") != -1 or self.path.find(".docx"):
+            self.raw_text =  self.extract_text_from_doc(self.path)
 
         if self.raw_text is not '':
             self.parse()
